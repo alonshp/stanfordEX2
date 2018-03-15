@@ -39,7 +39,9 @@ public struct SetGame {
             }
             for cardIndex in selectedCardsIndex {
                 cardsBeingPlayed[cardIndex].isSelected = false
-                cardsBeingPlayed[cardIndex] = deck.takeAcard()!
+                if cardsBeingPlayed[cardIndex].isMatch {
+                    cardsBeingPlayed[cardIndex] = deck.takeAcard()!
+                }
             }
             selectedCardsIndex = Set<Int>()
             if anotherCardSelected {
