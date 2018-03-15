@@ -30,11 +30,21 @@ class SetTests: XCTestCase {
     }
     
     func testMatchedSet() {
-
+        let game = SetGame()
+        let card1 = Card(symbol: .symbol0, number: .one, shading: .filled, color: .color0)
+        let card2 = Card(symbol: .symbol1, number: .one, shading: .filled, color: .color1)
+        let card3 = Card(symbol: .symbol2, number: .one, shading: .filled, color: .color2)
+        
+        XCTAssertTrue(game.isCardsMatch(cards: [card1,card2,card3]))
     }
     
     func testUnMatchedSet() {
+        let game = SetGame()
+        let card1 = Card(symbol: .symbol0, number: .one, shading: .filled, color: .color0)
+        let card2 = Card(symbol: .symbol0, number: .one, shading: .filled, color: .color1)
+        let card3 = Card(symbol: .symbol2, number: .one, shading: .filled, color: .color2)
         
+        XCTAssertFalse(game.isCardsMatch(cards: [card1,card2,card3]))
     }
     
     func testPerformanceExample() {

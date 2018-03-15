@@ -69,7 +69,7 @@ public struct SetGame {
         return isCardsMatch(cards: selectedCards)
     }
     
-    private func isCardsMatch(cards: [Card]) -> Bool{
+    public func isCardsMatch(cards: [Card]) -> Bool{
         var cardsColor = Set<Card.Color>()
         var cardsShading = Set<Card.Shading>()
         var cardsNumber = Set<Card.Number>()
