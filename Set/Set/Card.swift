@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Card {
+public struct Card {
     var isSelected = false
     var isMatch = false
     var symbol: Symbol

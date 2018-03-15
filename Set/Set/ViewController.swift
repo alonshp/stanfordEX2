@@ -24,7 +24,6 @@ class ViewController: UIViewController {
     
     @IBAction func startNewGame(_ sender: UIButton) {
         game.newGame()
-        showCards()
         updateViewFromModel()
     }
     
@@ -67,6 +66,7 @@ class ViewController: UIViewController {
                 button.layer.borderColor = UIColor.green.cgColor
             }
         }
+        showCards()
     }
     
     private func getButtonTitle(card: Card) -> String {
@@ -109,9 +109,9 @@ class ViewController: UIViewController {
         case .striped:
             return [NSAttributedStringKey.foregroundColor: color.withAlphaComponent(0.15)]
         case .filled:
-            return [NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.strokeWidth: -1]
+            return [NSAttributedStringKey.foregroundColor: color.withAlphaComponent(1), NSAttributedStringKey.strokeWidth: -1]
         case .outline:
-            return [NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.strokeWidth: 1]
+            return [NSAttributedStringKey.foregroundColor: color.withAlphaComponent(1), NSAttributedStringKey.strokeWidth: 4]
         }
     }
 }

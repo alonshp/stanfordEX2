@@ -15,10 +15,21 @@
 		163DCEF1205A636B00F94EAF /* SetGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEF0205A636B00F94EAF /* SetGame.swift */; };
 		163DCEF3205A637700F94EAF /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEF2205A637700F94EAF /* Card.swift */; };
 		163DCEF5205A723200F94EAF /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEF4205A723200F94EAF /* Deck.swift */; };
+		163DCEFD205AB23E00F94EAF /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEFC205AB23E00F94EAF /* SetTests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		163DCEFF205AB23E00F94EAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 163DCED220581DF500F94EAF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 163DCED920581DF500F94EAF;
+			remoteInfo = Set;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		163DCEDA20581DF500F94EAF /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		163DCEDA20581DF500F94EAF /* SetGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		163DCEDD20581DF500F94EAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		163DCEDF20581DF500F94EAF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		163DCEE220581DF500F94EAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -28,10 +39,20 @@
 		163DCEF0205A636B00F94EAF /* SetGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetGame.swift; sourceTree = "<group>"; };
 		163DCEF2205A637700F94EAF /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		163DCEF4205A723200F94EAF /* Deck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
+		163DCEFA205AB23E00F94EAF /* SetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		163DCEFC205AB23E00F94EAF /* SetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
+		163DCEFE205AB23E00F94EAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		163DCED720581DF500F94EAF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		163DCEF7205AB23E00F94EAF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				163DCEDC20581DF500F94EAF /* Set */,
+				163DCEFB205AB23E00F94EAF /* SetTests */,
 				163DCEDB20581DF500F94EAF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,7 +74,8 @@
 		163DCEDB20581DF500F94EAF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				163DCEDA20581DF500F94EAF /* Set.app */,
+				163DCEDA20581DF500F94EAF /* SetGame.app */,
+				163DCEFA205AB23E00F94EAF /* SetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,12 +104,21 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		163DCEFB205AB23E00F94EAF /* SetTests */ = {
+			isa = PBXGroup;
+			children = (
+				163DCEFC205AB23E00F94EAF /* SetTests.swift */,
+				163DCEFE205AB23E00F94EAF /* Info.plist */,
+			);
+			path = SetTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		163DCED920581DF500F94EAF /* Set */ = {
+		163DCED920581DF500F94EAF /* SetGame */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 163DCEEC20581DF500F94EAF /* Build configuration list for PBXNativeTarget "Set" */;
+			buildConfigurationList = 163DCEEC20581DF500F94EAF /* Build configuration list for PBXNativeTarget "SetGame" */;
 			buildPhases = (
 				163DCED620581DF500F94EAF /* Sources */,
 				163DCED720581DF500F94EAF /* Frameworks */,
@@ -96,10 +128,28 @@
 			);
 			dependencies = (
 			);
-			name = Set;
+			name = SetGame;
 			productName = Set;
-			productReference = 163DCEDA20581DF500F94EAF /* Set.app */;
+			productReference = 163DCEDA20581DF500F94EAF /* SetGame.app */;
 			productType = "com.apple.product-type.application";
+		};
+		163DCEF9205AB23E00F94EAF /* SetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 163DCF01205AB23E00F94EAF /* Build configuration list for PBXNativeTarget "SetTests" */;
+			buildPhases = (
+				163DCEF6205AB23E00F94EAF /* Sources */,
+				163DCEF7205AB23E00F94EAF /* Frameworks */,
+				163DCEF8205AB23E00F94EAF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				163DCF00205AB23E00F94EAF /* PBXTargetDependency */,
+			);
+			name = SetTests;
+			productName = SetTests;
+			productReference = 163DCEFA205AB23E00F94EAF /* SetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -114,6 +164,11 @@
 					163DCED920581DF500F94EAF = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+					};
+					163DCEF9205AB23E00F94EAF = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 163DCED920581DF500F94EAF;
 					};
 				};
 			};
@@ -130,7 +185,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				163DCED920581DF500F94EAF /* Set */,
+				163DCED920581DF500F94EAF /* SetGame */,
+				163DCEF9205AB23E00F94EAF /* SetTests */,
 			);
 		};
 /* End PBXProject section */
@@ -143,6 +199,13 @@
 				163DCEE820581DF500F94EAF /* LaunchScreen.storyboard in Resources */,
 				163DCEE520581DF500F94EAF /* Assets.xcassets in Resources */,
 				163DCEE320581DF500F94EAF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		163DCEF8205AB23E00F94EAF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +224,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		163DCEF6205AB23E00F94EAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				163DCEFD205AB23E00F94EAF /* SetTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		163DCF00205AB23E00F94EAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 163DCED920581DF500F94EAF /* SetGame */;
+			targetProxy = 163DCEFF205AB23E00F94EAF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		163DCEE120581DF500F94EAF /* Main.storyboard */ = {
@@ -320,6 +399,38 @@
 			};
 			name = Release;
 		};
+		163DCF02205AB23E00F94EAF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4WCHB3P8BK;
+				INFOPLIST_FILE = SetTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cherrypick.SetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SetGame.app/SetGame";
+			};
+			name = Debug;
+		};
+		163DCF03205AB23E00F94EAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4WCHB3P8BK;
+				INFOPLIST_FILE = SetTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cherrypick.SetTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SetGame.app/SetGame";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -332,11 +443,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		163DCEEC20581DF500F94EAF /* Build configuration list for PBXNativeTarget "Set" */ = {
+		163DCEEC20581DF500F94EAF /* Build configuration list for PBXNativeTarget "SetGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				163DCEED20581DF500F94EAF /* Debug */,
 				163DCEEE20581DF500F94EAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		163DCF01205AB23E00F94EAF /* Build configuration list for PBXNativeTarget "SetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				163DCF02205AB23E00F94EAF /* Debug */,
+				163DCF03205AB23E00F94EAF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

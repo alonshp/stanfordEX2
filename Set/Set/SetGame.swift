@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SetGame {
+public struct SetGame {
     
     var deck = Deck()
     var cardsBeingPlayed = [Card]()
@@ -19,14 +19,35 @@ struct SetGame {
     mutating func chooseCard(at index: Int) {
         assert(cardsBeingPlayed.indices.contains(index), "SetGame.chooseCard(at: \(index)) : Choosen index out of range")
         
-        if (selectedCardsIndex.count < 3){
+        switch selectedCardsIndex.count {
+        case 2:
             selectOrUnselectCard(at: index)
-        } else {
-            for i in selectedCardsIndex.indices {
-                cardsBeingPlayed[selectedCardsIndex[i]].isMatch = true
+            if selectedCardsIndex.count == 3{
+                if checkIfSelectedCardsAreMatch() {
+                    for cardIndex in selectedCardsIndex {
+                        cardsBeingPlayed[cardIndex].isMatch = true
+                        
+                    }
+                } else {
+                    
+                }
             }
+        case 3:
+            var anotherCardSelected = false
+            if !selectedCardsIndex.contains(index){
+                anotherCardSelected = true
+            }
+            for cardIndex in selectedCardsIndex {
+                cardsBeingPlayed[cardIndex].isSelected = false
+                cardsBeingPlayed[cardIndex] = deck.takeAcard()!
+            }
+            selectedCardsIndex = Set<Int>()
+            if anotherCardSelected {
+                selectOrUnselectCard(at: index)
+            }
+        default:
+            selectOrUnselectCard(at: index)
         }
-
     }
     
     mutating private func selectOrUnselectCard(at index: Int){
@@ -39,8 +60,36 @@ struct SetGame {
         }
     }
     
-    private func checkIfSelectedCardsAreMatch(){
+    private func checkIfSelectedCardsAreMatch() -> Bool{
+        var selectedCards = [Card]()
+        for index in selectedCardsIndex {
+            let currCard = cardsBeingPlayed[index]
+            selectedCards.append(currCard)
+        }
+        return isCardsMatch(cards: selectedCards)
+    }
+    
+    private func isCardsMatch(cards: [Card]) -> Bool{
+        var cardsColor = Set<Card.Color>()
+        var cardsShading = Set<Card.Shading>()
+        var cardsNumber = Set<Card.Number>()
+        var cardsSymbol = Set<Card.Symbol>()
         
+        for currCard in cards {
+            cardsColor.insert(currCard.color)
+            cardsSymbol.insert(currCard.symbol)
+            cardsNumber.insert(currCard.number)
+            cardsShading.insert(currCard.shading)
+        }
+        
+        if (cardsColor.count == 1 || cardsColor.count == Card.Color.all.count)
+            && (cardsShading.count == 1 || cardsShading.count == Card.Shading.all.count)
+            && (cardsNumber.count == 1 || cardsNumber.count == Card.Number.all.count)
+            && (cardsSymbol.count == 1 || cardsSymbol.count == Card.Symbol.all.count) {
+            return true
+        } else {
+            return false
+        }
     }
     
     mutating func newGame(){
