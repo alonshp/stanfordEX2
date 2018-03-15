@@ -12,7 +12,7 @@ public struct SetGame {
     
     var deck = Deck()
     var cardsBeingPlayed = [Card]()
-    
+    private(set) var score = 0
     private(set) var selectedCardsIndex = Set<Int>()
     private(set) var alreadyMatchedCards = [Card]()
     
@@ -26,10 +26,10 @@ public struct SetGame {
                 if checkIfSelectedCardsAreMatch() {
                     for cardIndex in selectedCardsIndex {
                         cardsBeingPlayed[cardIndex].isMatch = true
-                        
                     }
+                    score += 3
                 } else {
-                    
+                    score -= 5
                 }
             }
         case 3:
@@ -56,6 +56,7 @@ public struct SetGame {
         if cardsBeingPlayed[index].isSelected {
             cardsBeingPlayed[index].isSelected = false
             selectedCardsIndex.remove(index)
+            score -= 1
         } else {
             cardsBeingPlayed[index].isSelected = true
             selectedCardsIndex.insert(index)
@@ -97,6 +98,7 @@ public struct SetGame {
     mutating func newGame(){
         deck = Deck()
         cardsBeingPlayed = [Card]()
+        score = 0
         selectedCardsIndex = Set<Int>()
         alreadyMatchedCards = [Card]()
         takeCardsFromDeck(numberOfCards: 12)

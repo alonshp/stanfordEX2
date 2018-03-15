@@ -15,12 +15,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        showCards()
+        updateViewFromModel()
     }
     
+    @IBOutlet weak var scoreLable: UILabel!
     
     @IBOutlet var cardButtons: [UIButton]!
-    
     
     @IBAction func startNewGame(_ sender: UIButton) {
         game.newGame()
@@ -66,6 +66,7 @@ class ViewController: UIViewController {
                 button.layer.borderColor = UIColor.green.cgColor
             }
         }
+        scoreLable.text = "Score: \(game.score)"
         showCards()
     }
     

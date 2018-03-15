@@ -232,8 +232,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vz-fZ-for">
-                                <rect key="frame" x="16" y="623" width="105" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vz-fZ-for">
+                                <rect key="frame" x="16" y="623" width="343" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -251,11 +251,12 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Wf-Tg-gER" secondAttribute="trailing" constant="16" id="i4w-cc-RcP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2Vz-fZ-for" secondAttribute="bottom" constant="20" id="pvh-yU-ZTs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Doi-me-rAf" secondAttribute="bottom" constant="100" id="snZ-NI-ETz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Vz-fZ-for" secondAttribute="trailing" constant="254" id="v01-Mz-DCw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Vz-fZ-for" secondAttribute="trailing" constant="16" id="v01-Mz-DCw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="scoreLable" destination="2Vz-fZ-for" id="iVf-2m-9Ix"/>
                         <outletCollection property="cardButtons" destination="C63-z7-jyh" collectionClass="NSMutableArray" id="isl-QN-NHR"/>
                         <outletCollection property="cardButtons" destination="YPJ-ko-oxJ" collectionClass="NSMutableArray" id="rkA-8K-3N0"/>
                         <outletCollection property="cardButtons" destination="7bq-iA-7UX" collectionClass="NSMutableArray" id="Odu-xw-hRO"/>
