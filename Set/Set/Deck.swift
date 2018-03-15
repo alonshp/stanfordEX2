@@ -10,7 +10,7 @@ import Foundation
 
 struct Deck {
     
-    var cards = [Card]()
+    private var cards = [Card]()
     
     init() {
         for symbol in Card.Symbol.all {
@@ -24,6 +24,13 @@ struct Deck {
         }
         
         shuffleCards()
+    }
+    
+    mutating func takeAcard() -> Card? {
+        if cards.isEmpty {
+            return nil
+        }
+        return cards.remove(at: 0)
     }
     
     mutating func shuffleCards(){

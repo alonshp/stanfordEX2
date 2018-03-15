@@ -21,6 +21,13 @@ class ViewController: UIViewController {
     
     @IBOutlet var cardButtons: [UIButton]!
     
+    
+    @IBAction func startNewGame(_ sender: UIButton) {
+        game.newGame()
+        showCards()
+        updateViewFromModel()
+    }
+    
     @IBAction func touchCard(_ sender: UIButton) {
         guard let cardNumber = cardButtons.index(of: sender) else {
             print("choosen card was not in cardButtons")
@@ -34,7 +41,7 @@ class ViewController: UIViewController {
     private func showCards() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
-            let card = game.deck.cards[index]
+            let card = game.cardsBeingPlayed[index]
             let stringAttributes = getNSAttributedStringKeyForShadingAndColor(card: card)
             let buttonTitle = getButtonTitle(card: card)
             let AttrString = NSAttributedString(string: buttonTitle, attributes: stringAttributes)
@@ -46,7 +53,7 @@ class ViewController: UIViewController {
     private func updateViewFromModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
-            let card = game.deck.cards[index]
+            let card = game.cardsBeingPlayed[index]
             
             if card.isSelected {
                 button.layer.borderWidth = 3.0

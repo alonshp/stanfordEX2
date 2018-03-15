@@ -226,6 +226,9 @@
                                         <state key="normal" title="New Game">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="startNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L9B-BP-cL7"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

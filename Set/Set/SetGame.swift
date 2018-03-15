@@ -11,34 +11,58 @@ import Foundation
 struct SetGame {
     
     var deck = Deck()
+    var cardsBeingPlayed = [Card]()
     
-    private(set) var selectedCardsIndex = [Int]()
+    private(set) var selectedCardsIndex = Set<Int>()
+    private(set) var alreadyMatchedCards = [Card]()
     
     mutating func chooseCard(at index: Int) {
-        assert(deck.cards.indices.contains(index), "SetGame.chooseCard(at: \(index)) : Choosen index out of range")
+        assert(cardsBeingPlayed.indices.contains(index), "SetGame.chooseCard(at: \(index)) : Choosen index out of range")
         
         if (selectedCardsIndex.count < 3){
             selectOrUnselectCard(at: index)
         } else {
             for i in selectedCardsIndex.indices {
-                deck.cards[selectedCardsIndex[i]].isMatch = true
+                cardsBeingPlayed[selectedCardsIndex[i]].isMatch = true
             }
         }
 
     }
     
     mutating private func selectOrUnselectCard(at index: Int){
-        if deck.cards[index].isSelected {
-            deck.cards[index].isSelected = false
-            for i in selectedCardsIndex.indices {
-                if selectedCardsIndex[i] == index {
-                    selectedCardsIndex.remove(at: i)
-                }
-            }
+        if cardsBeingPlayed[index].isSelected {
+            cardsBeingPlayed[index].isSelected = false
+            selectedCardsIndex.remove(index)
         } else {
-            deck.cards[index].isSelected = true
-            selectedCardsIndex.append(index)
+            cardsBeingPlayed[index].isSelected = true
+            selectedCardsIndex.insert(index)
         }
+    }
+    
+    private func checkIfSelectedCardsAreMatch(){
+        
+    }
+    
+    mutating func newGame(){
+        deck = Deck()
+        cardsBeingPlayed = [Card]()
+        selectedCardsIndex = Set<Int>()
+        alreadyMatchedCards = [Card]()
+        takeCardsFromDeck(numberOfCards: 12)
+    }
+    
+    mutating private func takeCardsFromDeck(numberOfCards: Int){
+        for _ in 1...numberOfCards {
+            if let card = deck.takeAcard() {
+                cardsBeingPlayed.append(card)
+            } else {
+                print("No more cards in deck")
+            }
+        }
+    }
+    
+    init() {
+        takeCardsFromDeck(numberOfCards: 12)
     }
 }
 
