@@ -37,15 +37,27 @@ class ViewController: UIViewController {
         updateViewFromModel()
     }
     
-    private func showCards() {
-        for index in cardButtons.indices {
-            let button = cardButtons[index]
-            let card = game.cardsBeingPlayed[index]
-            let stringAttributes = getNSAttributedStringKeyForShadingAndColor(card: card)
-            let buttonTitle = getButtonTitle(card: card)
-            let AttrString = NSAttributedString(string: buttonTitle, attributes: stringAttributes)
+    private func showCardTitle(_ card: Card, _ button: UIButton) {
+        let stringAttributes = getNSAttributedStringKeyForShadingAndColor(card: card)
+        let buttonTitle = getButtonTitle(card: card)
+        let AttrString = NSAttributedString(string: buttonTitle, attributes: stringAttributes)
             
-            button.setAttributedTitle(AttrString, for: UIControlState.normal)
+        button.setAttributedTitle(AttrString, for: UIControlState.normal)
+    }
+    
+    private func showCardSelection(_ card: Card, _ button: UIButton) {
+        if card.isSelected {
+            button.layer.borderWidth = 3.0
+            button.layer.borderColor = UIColor.blue.cgColor
+        } else {
+            button.layer.borderWidth = 0
+        }
+    }
+    
+    private func showCardMatching(_ card: Card, _ button: UIButton) {
+        if card.isMatch {
+            button.layer.borderWidth = 3.0
+            button.layer.borderColor = UIColor.green.cgColor
         }
     }
     
@@ -54,20 +66,12 @@ class ViewController: UIViewController {
             let button = cardButtons[index]
             let card = game.cardsBeingPlayed[index]
             
-            if card.isSelected {
-                button.layer.borderWidth = 3.0
-                button.layer.borderColor = UIColor.blue.cgColor
-            } else {
-                button.layer.borderWidth = 0
-            }
-            
-            if card.isMatch {
-                button.layer.borderWidth = 3.0
-                button.layer.borderColor = UIColor.green.cgColor
-            }
+            showCardSelection(card, button)
+            showCardMatching(card, button)
+            showCardTitle(card, button)
         }
+        // update score lable
         scoreLable.text = "Score: \(game.score)"
-        showCards()
     }
     
     private func getButtonTitle(card: Card) -> String {
@@ -95,24 +99,28 @@ class ViewController: UIViewController {
         }
     }
     
-    private func getNSAttributedStringKeyForShadingAndColor(card: Card) -> [NSAttributedStringKey : Any] {
+    private func getCardColor(card: Card) -> UIColor {
         let colors = [#colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1),#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1),#colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1)]
-        var color: UIColor
         switch card.color {
         case .color0:
-            color = colors[0]
+            return colors[0]
         case .color1:
-            color = colors[1]
+            return colors[1]
         case .color2:
-            color = colors[2]
+            return colors[2]
         }
+    }
+    
+    private func getNSAttributedStringKeyForShadingAndColor(card: Card) -> [NSAttributedStringKey : Any] {
+        let cardColor = getCardColor(card: card)
+
         switch card.shading {
         case .striped:
-            return [NSAttributedStringKey.foregroundColor: color.withAlphaComponent(0.15)]
+            return [NSAttributedStringKey.foregroundColor: cardColor.withAlphaComponent(0.15)]
         case .filled:
-            return [NSAttributedStringKey.foregroundColor: color.withAlphaComponent(1), NSAttributedStringKey.strokeWidth: -1]
+            return [NSAttributedStringKey.foregroundColor: cardColor.withAlphaComponent(1), NSAttributedStringKey.strokeWidth: -1]
         case .outline:
-            return [NSAttributedStringKey.foregroundColor: color.withAlphaComponent(1), NSAttributedStringKey.strokeWidth: 4]
+            return [NSAttributedStringKey.foregroundColor: cardColor.withAlphaComponent(1), NSAttributedStringKey.strokeWidth: 4]
         }
     }
 }
