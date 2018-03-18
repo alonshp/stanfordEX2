@@ -16,6 +16,7 @@
 		163DCEF3205A637700F94EAF /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEF2205A637700F94EAF /* Card.swift */; };
 		163DCEF5205A723200F94EAF /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEF4205A723200F94EAF /* Deck.swift */; };
 		163DCEFD205AB23E00F94EAF /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEFC205AB23E00F94EAF /* SetTests.swift */; };
+		163DCF05205E498700F94EAF /* SelectedCardsAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCF04205E498700F94EAF /* SelectedCardsAttributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		163DCEFA205AB23E00F94EAF /* SetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		163DCEFC205AB23E00F94EAF /* SetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		163DCEFE205AB23E00F94EAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		163DCF04205E498700F94EAF /* SelectedCardsAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCardsAttributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		163DCEDC20581DF500F94EAF /* Set */ = {
 			isa = PBXGroup;
 			children = (
+				163DCF04205E498700F94EAF /* SelectedCardsAttributes.swift */,
 				163DCEDF20581DF500F94EAF /* ViewController.swift */,
 				163DCEF4205A723200F94EAF /* Deck.swift */,
 				163DCEE120581DF500F94EAF /* Main.storyboard */,
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				163DCEE020581DF500F94EAF /* ViewController.swift in Sources */,
+				163DCF05205E498700F94EAF /* SelectedCardsAttributes.swift in Sources */,
 				163DCEDE20581DF500F94EAF /* AppDelegate.swift in Sources */,
 				163DCEF5205A723200F94EAF /* Deck.swift in Sources */,
 				163DCEF1205A636B00F94EAF /* SetGame.swift in Sources */,

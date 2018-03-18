@@ -16,6 +16,26 @@ public struct SetGame {
     private(set) var selectedCardsIndex = Set<Int>()
     private(set) var alreadyMatchedCards = [Card]()
     
+    private mutating func checkCardsMatchingWhenThreeCardsSelected() {
+        if checkIfSelectedCardsAreMatch() {
+            for cardIndex in selectedCardsIndex {
+                cardsBeingPlayed[cardIndex].isMatch = true
+            }
+            score += 3
+        } else {
+            score -= 5
+        }
+    }
+    
+    private mutating func updateCardsAfterThreeSelected() {
+        for cardIndex in selectedCardsIndex {
+            cardsBeingPlayed[cardIndex].isSelected = false
+            if cardsBeingPlayed[cardIndex].isMatch {
+                cardsBeingPlayed[cardIndex] = deck.takeAcard()!
+            }
+        }
+    }
+    
     mutating func chooseCard(at index: Int) {
         assert(cardsBeingPlayed.indices.contains(index), "SetGame.chooseCard(at: \(index)) : Choosen index out of range")
         
@@ -23,28 +43,16 @@ public struct SetGame {
         case 2:
             selectOrUnselectCard(at: index)
             if selectedCardsIndex.count == 3{
-                if checkIfSelectedCardsAreMatch() {
-                    for cardIndex in selectedCardsIndex {
-                        cardsBeingPlayed[cardIndex].isMatch = true
-                    }
-                    score += 3
-                } else {
-                    score -= 5
-                }
+                checkCardsMatchingWhenThreeCardsSelected()
             }
         case 3:
-            var anotherCardSelected = false
-            if !selectedCardsIndex.contains(index){
-                anotherCardSelected = true
-            }
-            for cardIndex in selectedCardsIndex {
-                cardsBeingPlayed[cardIndex].isSelected = false
-                if cardsBeingPlayed[cardIndex].isMatch {
-                    cardsBeingPlayed[cardIndex] = deck.takeAcard()!
-                }
-            }
+            let isAnotherCardSelected = !selectedCardsIndex.contains(index)
+            updateCardsAfterThreeSelected()
+            // reset selected cards set
             selectedCardsIndex = Set<Int>()
-            if anotherCardSelected {
+            
+            // select the another card if selected
+            if isAnotherCardSelected {
                 selectOrUnselectCard(at: index)
             }
         default:
@@ -52,7 +60,7 @@ public struct SetGame {
         }
     }
     
-    mutating private func selectOrUnselectCard(at index: Int){
+    private mutating func selectOrUnselectCard(at index: Int){
         if cardsBeingPlayed[index].isSelected {
             cardsBeingPlayed[index].isSelected = false
             selectedCardsIndex.remove(index)
@@ -72,7 +80,7 @@ public struct SetGame {
         return isCardsMatch(cards: selectedCards)
     }
     
-    public func isCardsMatch(cards: [Card]) -> Bool{
+    private func getCardsAttributesCount(cards: [Card]) -> SelectedCardsAttributes{
         var cardsColor = Set<Card.Color>()
         var cardsShading = Set<Card.Shading>()
         var cardsNumber = Set<Card.Number>()
@@ -84,11 +92,21 @@ public struct SetGame {
             cardsNumber.insert(currCard.number)
             cardsShading.insert(currCard.shading)
         }
+        return SelectedCardsAttributes(cardsColorCount: cardsColor.count, cardsShadingCount: cardsShading.count, cardsNumberCount: cardsNumber.count, cardsSymbolCount: cardsSymbol.count)
+    }
+    
+    public func isCardsMatch(cards: [Card]) -> Bool{
+        let cardsAttributesCount = getCardsAttributesCount(cards: cards)
         
-        if (cardsColor.count == 1 || cardsColor.count == Card.Color.all.count)
-            && (cardsShading.count == 1 || cardsShading.count == Card.Shading.all.count)
-            && (cardsNumber.count == 1 || cardsNumber.count == Card.Number.all.count)
-            && (cardsSymbol.count == 1 || cardsSymbol.count == Card.Symbol.all.count) {
+        let cardsColorCount = cardsAttributesCount.cardsColorCount
+        let cardsShadingCount = cardsAttributesCount.cardsShadingCount
+        let cardsNumberCount = cardsAttributesCount.cardsNumberCount
+        let cardsSymbolCount = cardsAttributesCount.cardsSymbolCount
+        
+        if (cardsColorCount == 1 || cardsColorCount == Card.Color.all.count)
+            && (cardsShadingCount == 1 || cardsShadingCount == Card.Shading.all.count)
+            && (cardsNumberCount == 1 || cardsNumberCount == Card.Number.all.count)
+            && (cardsSymbolCount == 1 || cardsSymbolCount == Card.Symbol.all.count) {
             return true
         } else {
             return false
