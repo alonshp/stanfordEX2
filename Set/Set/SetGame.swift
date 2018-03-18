@@ -21,9 +21,24 @@ public struct SetGame {
             for cardIndex in selectedCardsIndex {
                 cardsBeingPlayed[cardIndex].isMatch = true
             }
-            score += 3
+            increaseScoreAccordingToNumberOfCardsBeingPlayed()
         } else {
             score -= 5
+        }
+    }
+    
+    private mutating func increaseScoreAccordingToNumberOfCardsBeingPlayed() {
+        switch cardsBeingPlayed.count {
+        case 13...15:
+            score += 4
+        case 16...18:
+            score += 3
+        case 19...21:
+            score += 2
+        case 22...24:
+            score += 1
+        default:
+            score += 5
         }
     }
     
