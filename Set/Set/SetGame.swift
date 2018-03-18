@@ -36,6 +36,8 @@ public struct SetGame {
                 } else {
                     cardsBeingPlayed[cardIndex].isAppearOnScreen = false
                 }
+                // add the match card to alreadyMatchedCards array
+                alreadyMatchedCards.append(cardsBeingPlayed[cardIndex])
             }
         }
         // reset selected cards set
@@ -46,6 +48,7 @@ public struct SetGame {
         if selectedCardsIndex.count == 3 {
             updateCardsAfterThreeSelected()
         } else if cardsBeingPlayed.count < 24 {
+            // there is more place on the screen
             takeCardsFromDeck(numberOfCards: 3)
         }
     }

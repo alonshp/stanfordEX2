@@ -37,9 +37,16 @@ class ViewController: UIViewController {
         guard cardNumber < game.cardsBeingPlayed.count else {
             return
         }
+        
+
         game.chooseCard(at: cardNumber)
         
         updateViewFromModel()
+        
+        // check if game is finished
+        if (game.alreadyMatchedCards.count == 81){
+            showAlertWhenGameFinished()
+        }
     }
     
     @IBAction func dealThreeMoreCards(_ sender: UIButton) {
@@ -117,9 +124,9 @@ class ViewController: UIViewController {
     }
     
     private func updateDealThreeMoreCardsButton() {
-        if isMatchOnScreen {
+        if isMatchOnScreen, !game.deck.isNoMoreCardsInDeck() {
             DealThreeMoreCardsButton.isEnabled = true
-        } else if game.cardsBeingPlayed.count == 24 {
+        } else if game.cardsBeingPlayed.count == 24 || game.deck.isNoMoreCardsInDeck() {
             DealThreeMoreCardsButton.isEnabled = false
         } else {
             DealThreeMoreCardsButton.isEnabled = true
@@ -174,6 +181,17 @@ class ViewController: UIViewController {
         case .outline:
             return [NSAttributedStringKey.foregroundColor: cardColor.withAlphaComponent(1), NSAttributedStringKey.strokeWidth: 4]
         }
+    }
+    
+    private func showAlertWhenGameFinished() {
+        // create the alert
+        let alert = UIAlertController(title: "Congratulations!", message: "Your Final Score: \(game.score)", preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

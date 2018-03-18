@@ -26,6 +26,10 @@ public struct Deck {
         shuffleCards()
     }
     
+    func isNoMoreCardsInDeck() -> Bool {
+        return cards.isEmpty
+    }
+    
     mutating func takeAcard() -> Card? {
         if cards.isEmpty {
             return nil
