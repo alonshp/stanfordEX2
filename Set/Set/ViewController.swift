@@ -137,19 +137,17 @@ class ViewController: UIViewController {
         self.updateViewFromModel()
         view.isUserInteractionEnabled = false
         isMatchOnScreen = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            self.game.updateCardsAfterThreeSelected()
-            self.updateViewFromModel()
-            self.iphonePlay()
-            self.isMatchOnScreen = false
-            self.view.isUserInteractionEnabled = true
-        }
+        moveToNextRoundAfterThreeSeconds()
     }
     
     private func iphoneLose(){
         timer?.invalidate()
         self.emojiLable.text = "😢"
         view.isUserInteractionEnabled = false
+        moveToNextRoundAfterThreeSeconds()
+    }
+    
+    private func moveToNextRoundAfterThreeSeconds() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.game.updateCardsAfterThreeSelected()
             self.updateViewFromModel()
