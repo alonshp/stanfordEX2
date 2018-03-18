@@ -164,7 +164,7 @@ public struct SetGame {
         takeCardsFromDeck(numberOfCards: 12)
     }
     
-    mutating private func takeCardsFromDeck(numberOfCards: Int){
+    public mutating func takeCardsFromDeck(numberOfCards: Int){
         for _ in 1...numberOfCards {
             if let card = deck.takeAcard() {
                 cardsBeingPlayed.append(card)

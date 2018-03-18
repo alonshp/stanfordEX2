@@ -50,8 +50,20 @@ class SetTests: XCTestCase {
     func testFindSet() {
         let game = SetGame()
         if let set = game.findSet() {
+            XCTAssertNotNil(game.cardsBeingPlayed.index(of: set[0]))
+            XCTAssertNotNil(game.cardsBeingPlayed.index(of: set[1]))
+            XCTAssertNotNil(game.cardsBeingPlayed.index(of: set[2]))
             XCTAssertTrue(game.isCardsMatch(cards: set))
         }
+    }
+    
+    func testEmptyDeck() {
+        var game = SetGame()
+        XCTAssertFalse(game.deck.isNoMoreCardsInDeck())
+        game.takeCardsFromDeck(numberOfCards: 81 - 13)
+        XCTAssertFalse(game.deck.isNoMoreCardsInDeck())
+        game.takeCardsFromDeck(numberOfCards: 1)
+        XCTAssertTrue(game.deck.isNoMoreCardsInDeck())
     }
     
     func testPerformanceExample() {
