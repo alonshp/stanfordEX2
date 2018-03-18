@@ -58,6 +58,9 @@ class ViewController: UIViewController {
         if card.isMatch {
             button.layer.borderWidth = 3.0
             button.layer.borderColor = UIColor.green.cgColor
+        } else if game.selectedCardsIndex.count == 3, card.isSelected {
+            button.layer.borderWidth = 3.0
+            button.layer.borderColor = UIColor.red.cgColor
         }
     }
     
