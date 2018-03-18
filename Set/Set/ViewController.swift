@@ -54,6 +54,17 @@ class ViewController: UIViewController {
         }
     }
     
+    private func isCardAppearOnScreen(_ card: Card, _ button: UIButton) -> Bool {
+        if card.isAppearOnScreen {
+            return true
+        } else {
+            button.layer.borderWidth = 0
+            button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+            button.setAttributedTitle(NSAttributedString(string: ""), for: UIControlState.normal)
+            return false
+        }
+    }
+    
     private func showCardMatching(_ card: Card, _ button: UIButton) {
         if card.isMatch {
             button.layer.borderWidth = 3.0
@@ -68,10 +79,12 @@ class ViewController: UIViewController {
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cardsBeingPlayed[index]
-            
-            showCardSelection(card, button)
-            showCardMatching(card, button)
-            showCardTitle(card, button)
+            if isCardAppearOnScreen(card, button) {
+                button.backgroundColor = #colorLiteral(red: 0.675611496, green: 0.7385349274, blue: 1, alpha: 1)
+                showCardSelection(card, button)
+                showCardMatching(card, button)
+                showCardTitle(card, button)
+            }
         }
         // update score lable
         scoreLable.text = "Score: \(game.score)"

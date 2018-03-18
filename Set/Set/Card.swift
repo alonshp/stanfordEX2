@@ -11,6 +11,7 @@ import Foundation
 public struct Card {
     var isSelected = false
     var isMatch = false
+    var isAppearOnScreen = true
     var symbol: Symbol
     var number: Number
     var shading: Shading

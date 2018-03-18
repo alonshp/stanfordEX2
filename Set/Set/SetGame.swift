@@ -31,13 +31,21 @@ public struct SetGame {
         for cardIndex in selectedCardsIndex {
             cardsBeingPlayed[cardIndex].isSelected = false
             if cardsBeingPlayed[cardIndex].isMatch {
-                cardsBeingPlayed[cardIndex] = deck.takeAcard()!
+                if let newCard = deck.takeAcard() {
+                    cardsBeingPlayed[cardIndex] = newCard
+                } else {
+                    cardsBeingPlayed[cardIndex].isAppearOnScreen = false
+                }
             }
         }
     }
     
     mutating func chooseCard(at index: Int) {
         assert(cardsBeingPlayed.indices.contains(index), "SetGame.chooseCard(at: \(index)) : Choosen index out of range")
+        
+        guard cardsBeingPlayed[index].isAppearOnScreen else {
+            return
+        }
         
         switch selectedCardsIndex.count {
         case 2:
@@ -58,6 +66,7 @@ public struct SetGame {
         default:
             selectOrUnselectCard(at: index)
         }
+        
     }
     
     private mutating func selectOrUnselectCard(at index: Int){
@@ -97,12 +106,12 @@ public struct SetGame {
     
     public func isCardsMatch(cards: [Card]) -> Bool{
         let cardsAttributesCount = getCardsAttributesCount(cards: cards)
-        
+
         let cardsColorCount = cardsAttributesCount.cardsColorCount
         let cardsShadingCount = cardsAttributesCount.cardsShadingCount
         let cardsNumberCount = cardsAttributesCount.cardsNumberCount
         let cardsSymbolCount = cardsAttributesCount.cardsSymbolCount
-        
+
         if (cardsColorCount == 1 || cardsColorCount == Card.Color.all.count)
             && (cardsShadingCount == 1 || cardsShadingCount == Card.Shading.all.count)
             && (cardsNumberCount == 1 || cardsNumberCount == Card.Number.all.count)
