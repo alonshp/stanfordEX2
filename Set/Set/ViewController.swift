@@ -14,11 +14,17 @@ class ViewController: UIViewController {
     
     private var isMatchOnScreen = false
     
+    private var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         updateViewFromModel()
+        
+        iphonePlay()
     }
+    
+    @IBOutlet weak var emojiLable: UILabel!
     
     @IBOutlet weak var scoreLable: UILabel!
     
@@ -27,6 +33,10 @@ class ViewController: UIViewController {
     @IBAction func startNewGame(_ sender: UIButton) {
         game.newGame()
         updateViewFromModel()
+        if let timer = timer {
+            timer.invalidate()
+        }
+        iphonePlay()
     }
     
     @IBAction func touchCard(_ sender: UIButton) {
@@ -38,11 +48,13 @@ class ViewController: UIViewController {
             return
         }
         
-        
-        
         game.chooseCard(at: cardNumber)
         
         updateViewFromModel()
+        
+        if isMatchOnScreen {
+            iphoneLose()
+        }
         
         // check if game is finished
         if (game.alreadyMatchedCards.count == 81){
@@ -62,6 +74,7 @@ class ViewController: UIViewController {
     @IBAction func cheatButton(_ sender: UIButton) {
         game.findAndMatchSet()
         updateViewFromModel()
+        iphoneLose()
     }
     
     private func showCardTitle(_ card: Card, _ button: UIButton) {
@@ -105,6 +118,44 @@ class ViewController: UIViewController {
             button.layer.borderWidth = 3.0
             button.layer.borderColor = UIColor.red.cgColor
             isMatchOnScreen = false
+        }
+    }
+    
+    private func iphonePlay(){
+        emojiLable.text = "🤔"
+        timer = Timer.scheduledTimer(withTimeInterval: (TimeInterval(5 + 30.arc4random)), repeats: false) { timer in
+            self.emojiLable.text = "😁"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                self.iphoneWins()
+            }
+        }
+    }
+    
+    private func iphoneWins(){
+        self.emojiLable.text = "😂"
+        self.game.findAndMatchSet()
+        self.updateViewFromModel()
+        view.isUserInteractionEnabled = false
+        isMatchOnScreen = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.game.updateCardsAfterThreeSelected()
+            self.updateViewFromModel()
+            self.iphonePlay()
+            self.isMatchOnScreen = false
+            self.view.isUserInteractionEnabled = true
+        }
+    }
+    
+    private func iphoneLose(){
+        timer?.invalidate()
+        self.emojiLable.text = "😢"
+        view.isUserInteractionEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.game.updateCardsAfterThreeSelected()
+            self.updateViewFromModel()
+            self.iphonePlay()
+            self.isMatchOnScreen = false
+            self.view.isUserInteractionEnabled = true
         }
     }
     

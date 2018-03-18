@@ -318,6 +318,7 @@
                     </view>
                     <connections>
                         <outlet property="DealThreeMoreCardsButton" destination="JMf-ej-raK" id="sZr-MD-vd5"/>
+                        <outlet property="emojiLable" destination="stC-If-yJJ" id="nk8-gU-FR2"/>
                         <outlet property="scoreLable" destination="2Vz-fZ-for" id="iVf-2m-9Ix"/>
                         <outletCollection property="cardButtons" destination="C63-z7-jyh" collectionClass="NSMutableArray" id="isl-QN-NHR"/>
                         <outletCollection property="cardButtons" destination="YPJ-ko-oxJ" collectionClass="NSMutableArray" id="rkA-8K-3N0"/>

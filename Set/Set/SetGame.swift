@@ -42,7 +42,7 @@ public struct SetGame {
         }
     }
     
-    private mutating func updateCardsAfterThreeSelected() {
+    mutating func updateCardsAfterThreeSelected() {
         for cardIndex in selectedCardsIndex {
             cardsBeingPlayed[cardIndex].isSelected = false
             if cardsBeingPlayed[cardIndex].isMatch {
@@ -193,7 +193,7 @@ public struct SetGame {
     
     mutating func findAndMatchSet() {
         if let set = findSet() {
-        selectedCardsIndex = Set<Int>()
+        resetSelectedCardsIndexArray()
             for card in set {
                 if let cardIndex = cardsBeingPlayed.index(of: card){
                     cardsBeingPlayed[cardIndex].isMatch = true
@@ -201,6 +201,13 @@ public struct SetGame {
                 }
             }
         }
+    }
+    
+    private mutating func resetSelectedCardsIndexArray(){
+        for cardIndex in selectedCardsIndex{
+            cardsBeingPlayed[cardIndex].isSelected = false
+        }
+        selectedCardsIndex = Set<Int>()
     }
     
     init() {
