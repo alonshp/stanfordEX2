@@ -12,6 +12,8 @@ class ViewController: UIViewController {
 
     private lazy var game = SetGame()
     
+    private var isMatchOnScreen = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -32,10 +34,22 @@ class ViewController: UIViewController {
             print("choosen card was not in cardButtons")
             return
         }
+        guard cardNumber < game.cardsBeingPlayed.count else {
+            return
+        }
         game.chooseCard(at: cardNumber)
         
         updateViewFromModel()
     }
+    
+    @IBAction func dealThreeMoreCards(_ sender: UIButton) {
+        isMatchOnScreen = false
+        game.dealThreeMoreCards()
+        updateViewFromModel()
+    }
+    
+    
+    @IBOutlet weak var DealThreeMoreCardsButton: UIButton!
     
     private func showCardTitle(_ card: Card, _ button: UIButton) {
         let stringAttributes = getNSAttributedStringKeyForShadingAndColor(card: card)
@@ -58,26 +72,36 @@ class ViewController: UIViewController {
         if card.isAppearOnScreen {
             return true
         } else {
-            button.layer.borderWidth = 0
-            button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
-            button.setAttributedTitle(NSAttributedString(string: ""), for: UIControlState.normal)
+            hiddenCardButtonFromScreen(button)
             return false
         }
+    }
+    
+    private func hiddenCardButtonFromScreen(_ button: UIButton){
+        button.layer.borderWidth = 0
+        button.backgroundColor = #colorLiteral(red: 0.675611496, green: 0.7385349274, blue: 1, alpha: 0)
+        button.setAttributedTitle(NSAttributedString(string: ""), for: UIControlState.normal)
     }
     
     private func showCardMatching(_ card: Card, _ button: UIButton) {
         if card.isMatch {
             button.layer.borderWidth = 3.0
             button.layer.borderColor = UIColor.green.cgColor
+            isMatchOnScreen = true
         } else if game.selectedCardsIndex.count == 3, card.isSelected {
             button.layer.borderWidth = 3.0
             button.layer.borderColor = UIColor.red.cgColor
+            isMatchOnScreen = false
         }
     }
     
     private func updateViewFromModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
+            guard index < game.cardsBeingPlayed.count else {
+                hiddenCardButtonFromScreen(button)
+                continue
+            }
             let card = game.cardsBeingPlayed[index]
             if isCardAppearOnScreen(card, button) {
                 button.backgroundColor = #colorLiteral(red: 0.675611496, green: 0.7385349274, blue: 1, alpha: 1)
@@ -88,6 +112,18 @@ class ViewController: UIViewController {
         }
         // update score lable
         scoreLable.text = "Score: \(game.score)"
+        
+        updateDealThreeMoreCardsButton()
+    }
+    
+    private func updateDealThreeMoreCardsButton() {
+        if isMatchOnScreen {
+            DealThreeMoreCardsButton.isEnabled = true
+        } else if game.cardsBeingPlayed.count == 24 {
+            DealThreeMoreCardsButton.isEnabled = false
+        } else {
+            DealThreeMoreCardsButton.isEnabled = true
+        }
     }
     
     private func getButtonTitle(card: Card) -> String {

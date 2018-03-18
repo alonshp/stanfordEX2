@@ -38,6 +38,16 @@ public struct SetGame {
                 }
             }
         }
+        // reset selected cards set
+        selectedCardsIndex = Set<Int>()
+    }
+    
+    mutating func dealThreeMoreCards(){
+        if selectedCardsIndex.count == 3 {
+            updateCardsAfterThreeSelected()
+        } else if cardsBeingPlayed.count < 24 {
+            takeCardsFromDeck(numberOfCards: 3)
+        }
     }
     
     mutating func chooseCard(at index: Int) {
@@ -56,8 +66,6 @@ public struct SetGame {
         case 3:
             let isAnotherCardSelected = !selectedCardsIndex.contains(index)
             updateCardsAfterThreeSelected()
-            // reset selected cards set
-            selectedCardsIndex = Set<Int>()
             
             // select the another card if selected
             if isAnotherCardSelected {
