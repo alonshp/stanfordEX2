@@ -38,7 +38,8 @@ class ViewController: UIViewController {
             return
         }
         
-
+        
+        
         game.chooseCard(at: cardNumber)
         
         updateViewFromModel()
@@ -57,6 +58,11 @@ class ViewController: UIViewController {
     
     
     @IBOutlet weak var DealThreeMoreCardsButton: UIButton!
+    
+    @IBAction func cheatButton(_ sender: UIButton) {
+        game.findAndMatchSet()
+        updateViewFromModel()
+    }
     
     private func showCardTitle(_ card: Card, _ button: UIButton) {
         let stringAttributes = getNSAttributedStringKeyForShadingAndColor(card: card)

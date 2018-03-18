@@ -14,7 +14,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Set" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SetGame" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -271,26 +271,48 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vz-fZ-for">
-                                <rect key="frame" x="16" y="623" width="343" height="24"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vpc-Iw-sGL">
+                                <rect key="frame" x="16" y="623" width="343" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Vz-fZ-for">
+                                        <rect key="frame" x="0.0" y="0.0" width="185.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJn-dP-nmV">
+                                        <rect key="frame" x="193.5" y="0.0" width="103.5" height="30"/>
+                                        <color key="backgroundColor" red="0.38038012385368347" green="0.46892261505126953" blue="0.96871036291122437" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Cheat">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cheatButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sqm-KS-DWk"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stC-If-yJJ">
+                                        <rect key="frame" x="305" y="0.0" width="38" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Wf-Tg-gER" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="CMu-1Z-Imv"/>
+                            <constraint firstItem="vpc-Iw-sGL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="KJ4-Tv-lVJ"/>
                             <constraint firstItem="Doi-me-rAf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ln6-9h-cuO"/>
-                            <constraint firstItem="2Vz-fZ-for" firstAttribute="top" secondItem="6Wf-Tg-gER" secondAttribute="bottom" constant="8" symbolic="YES" id="U9G-aM-8U4"/>
-                            <constraint firstItem="2Vz-fZ-for" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="cZQ-eg-i8P"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vpc-Iw-sGL" secondAttribute="bottom" constant="14" id="PhZ-QA-HWf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vpc-Iw-sGL" secondAttribute="trailing" constant="16" id="WPU-cY-ack"/>
                             <constraint firstItem="6Wf-Tg-gER" firstAttribute="top" secondItem="wvz-yx-mev" secondAttribute="bottom" constant="8" id="g4V-xJ-wSx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Doi-me-rAf" secondAttribute="trailing" constant="16" id="gRt-oj-pGf"/>
                             <constraint firstItem="Doi-me-rAf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="gmo-rS-RVR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6Wf-Tg-gER" secondAttribute="trailing" constant="16" id="i4w-cc-RcP"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="2Vz-fZ-for" secondAttribute="bottom" constant="20" id="pvh-yU-ZTs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="Doi-me-rAf" secondAttribute="bottom" constant="100" id="snZ-NI-ETz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2Vz-fZ-for" secondAttribute="trailing" constant="16" id="v01-Mz-DCw"/>
+                            <constraint firstItem="vpc-Iw-sGL" firstAttribute="top" secondItem="6Wf-Tg-gER" secondAttribute="bottom" constant="8" symbolic="YES" id="zVR-Cc-HAa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

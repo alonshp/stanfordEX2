@@ -63,13 +63,15 @@ public struct SetGame {
         if selectedCardsIndex.count == 3 {
             updateCardsAfterThreeSelected()
         } else if cardsBeingPlayed.count < 24 {
-            // there is more place on the screen
-            takeCardsFromDeck(numberOfCards: 3)
-            
             // if there is a set in the visivle cards - decrease score
             if findSet() != nil {
                 score -= 3
             }
+            
+            // there is more place on the screen
+            takeCardsFromDeck(numberOfCards: 3)
+            
+
         }
     }
     
@@ -176,7 +178,8 @@ public struct SetGame {
         for cardOne in cardsBeingPlayed {
             for cardTwo in cardsBeingPlayed {
                 for cardThree in cardsBeingPlayed {
-                    if cardOne != cardTwo && cardOne != cardThree && cardTwo != cardThree {
+                    if cardOne != cardTwo && cardOne != cardThree && cardTwo != cardThree
+                        && !cardOne.isMatch && !cardTwo.isMatch && !cardThree.isMatch {
                         let possibleSet = [cardOne, cardTwo, cardThree]
                         if isCardsMatch(cards: possibleSet){
                             return possibleSet
@@ -186,6 +189,18 @@ public struct SetGame {
             }
         }
         return nil
+    }
+    
+    mutating func findAndMatchSet() {
+        if let set = findSet() {
+        selectedCardsIndex = Set<Int>()
+            for card in set {
+                if let cardIndex = cardsBeingPlayed.index(of: card){
+                    cardsBeingPlayed[cardIndex].isMatch = true
+                    selectedCardsIndex.insert(cardIndex)
+                }
+            }
+        }
     }
     
     init() {
