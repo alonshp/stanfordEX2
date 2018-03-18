@@ -65,6 +65,11 @@ public struct SetGame {
         } else if cardsBeingPlayed.count < 24 {
             // there is more place on the screen
             takeCardsFromDeck(numberOfCards: 3)
+            
+            // if there is a set in the visivle cards - decrease score
+            if findSet() != nil {
+                score -= 3
+            }
         }
     }
     
@@ -165,6 +170,22 @@ public struct SetGame {
                 print("No more cards in deck")
             }
         }
+    }
+    
+    public func findSet() -> [Card]?{
+        for cardOne in cardsBeingPlayed {
+            for cardTwo in cardsBeingPlayed {
+                for cardThree in cardsBeingPlayed {
+                    if cardOne != cardTwo && cardOne != cardThree && cardTwo != cardThree {
+                        let possibleSet = [cardOne, cardTwo, cardThree]
+                        if isCardsMatch(cards: possibleSet){
+                            return possibleSet
+                        }
+                    }
+                }
+            }
+        }
+        return nil
     }
     
     init() {

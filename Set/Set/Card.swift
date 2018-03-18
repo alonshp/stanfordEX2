@@ -8,7 +8,15 @@
 
 import Foundation
 
-public struct Card {
+public struct Card: Equatable {
+    public static func ==(lhs: Card, rhs: Card) -> Bool {
+        if lhs.color == rhs.color && lhs.number == rhs.number && lhs.shading == rhs.shading && lhs.symbol == rhs.symbol {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     var isSelected = false
     var isMatch = false
     var isAppearOnScreen = true

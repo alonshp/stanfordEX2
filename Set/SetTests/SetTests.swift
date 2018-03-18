@@ -47,6 +47,13 @@ class SetTests: XCTestCase {
         XCTAssertFalse(game.isCardsMatch(cards: [card1,card2,card3]))
     }
     
+    func testFindSet() {
+        let game = SetGame()
+        if let set = game.findSet() {
+            XCTAssertTrue(game.isCardsMatch(cards: set))
+        }
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {

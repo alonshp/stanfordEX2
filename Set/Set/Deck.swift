@@ -23,7 +23,7 @@ public struct Deck {
             }
         }
         
-        shuffleCards()
+        cards.shuffle()
     }
     
     func isNoMoreCardsInDeck() -> Bool {
@@ -36,12 +36,14 @@ public struct Deck {
         }
         return cards.remove(at: 0)
     }
-    
-    mutating func shuffleCards(){
-        var shuffeled = [Card]()
-        while !cards.isEmpty {
-            shuffeled.append(cards.remove(at: cards.count.arc4random))
+}
+
+extension Array where Element: Equatable{
+    mutating func shuffle(){
+        var shuffeled = [Element]()
+        while !self.isEmpty {
+            shuffeled.append(self.remove(at: self.count.arc4random))
         }
-        cards = shuffeled
+        self = shuffeled
     }
 }
