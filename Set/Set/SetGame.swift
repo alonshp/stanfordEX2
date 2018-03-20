@@ -43,6 +43,7 @@ public struct SetGame {
     }
     
     mutating func updateCardsAfterThreeSelected() {
+        var matchCards = [Card]()
         for cardIndex in selectedCardsIndex {
             cardsBeingPlayed[cardIndex].isSelected = false
             if cardsBeingPlayed[cardIndex].isMatch {
@@ -50,10 +51,15 @@ public struct SetGame {
                     cardsBeingPlayed[cardIndex] = newCard
                 } else {
                     cardsBeingPlayed[cardIndex].isAppearOnScreen = false
+                    matchCards.append(cardsBeingPlayed[cardIndex])
                 }
                 // add the match card to alreadyMatchedCards array
                 alreadyMatchedCards.append(cardsBeingPlayed[cardIndex])
             }
+        }
+        
+        for card in matchCards {
+            cardsBeingPlayed.remove(at: cardsBeingPlayed.index(of: card)!)
         }
         // reset selected cards set
         selectedCardsIndex = Set<Int>()
@@ -136,21 +142,22 @@ public struct SetGame {
     }
     
     public func isCardsMatch(cards: [Card]) -> Bool{
-        let cardsAttributesCount = getCardsAttributesCount(cards: cards)
-
-        let cardsColorCount = cardsAttributesCount.cardsColorCount
-        let cardsShadingCount = cardsAttributesCount.cardsShadingCount
-        let cardsNumberCount = cardsAttributesCount.cardsNumberCount
-        let cardsSymbolCount = cardsAttributesCount.cardsSymbolCount
-
-        if (cardsColorCount == 1 || cardsColorCount == Card.Color.all.count)
-            && (cardsShadingCount == 1 || cardsShadingCount == Card.Shading.all.count)
-            && (cardsNumberCount == 1 || cardsNumberCount == Card.Number.all.count)
-            && (cardsSymbolCount == 1 || cardsSymbolCount == Card.Symbol.all.count) {
-            return true
-        } else {
-            return false
-        }
+//        let cardsAttributesCount = getCardsAttributesCount(cards: cards)
+//
+//        let cardsColorCount = cardsAttributesCount.cardsColorCount
+//        let cardsShadingCount = cardsAttributesCount.cardsShadingCount
+//        let cardsNumberCount = cardsAttributesCount.cardsNumberCount
+//        let cardsSymbolCount = cardsAttributesCount.cardsSymbolCount
+//
+//        if (cardsColorCount == 1 || cardsColorCount == Card.Color.all.count)
+//            && (cardsShadingCount == 1 || cardsShadingCount == Card.Shading.all.count)
+//            && (cardsNumberCount == 1 || cardsNumberCount == Card.Number.all.count)
+//            && (cardsSymbolCount == 1 || cardsSymbolCount == Card.Symbol.all.count) {
+//            return true
+//        } else {
+//            return false
+//        }
+        return true
     }
     
     mutating func newGame(){

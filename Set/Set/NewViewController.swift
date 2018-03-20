@@ -18,6 +18,12 @@ class NewViewController: UIViewController {
     
     private var isMatchOnScreen = false
     
+    private var wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = false
+    
+    private var matchCardViewsOnLastMoveWhenDeckIsEmpty = [CardView]()
+    
+    private var matchCardViewsOnScreen = [CardView]()
+    
     private var rotationGesture: UIRotationGestureRecognizer?
     
     override func viewDidLoad() {
@@ -90,6 +96,8 @@ class NewViewController: UIViewController {
     private func updateViewFromModel() {
         let numberOfCards = game.cardsBeingPlayed.count
         let newGrid = getNewGrid(numberOfCards: numberOfCards)
+        isMatchOnScreen = false
+        matchCardViewsOnScreen = [CardView]()
         for index in game.cardsBeingPlayed.indices {
             let card = game.cardsBeingPlayed[index]
             let cardView = cardViews[index]
@@ -98,6 +106,20 @@ class NewViewController: UIViewController {
             showCardSelection(card, cardView)
             showCardMatching(card, cardView)
         }
+        if wasMatchOnScreenOnLastMoveWhenDeckIsEmpty {
+            wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = false
+            for cardView in matchCardViewsOnLastMoveWhenDeckIsEmpty {
+                cardView.removeFromSuperview()
+            }
+        }
+        if game.deck.isNoMoreCardsInDeck(), isMatchOnScreen {
+            wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = true
+            for cardView in matchCardViewsOnScreen {
+                cardViews.remove(at: cardViews.index(of: cardView)!)
+                matchCardViewsOnLastMoveWhenDeckIsEmpty.append(cardView)
+            }
+        }
+        
     }
     
     private func showCardMatching(_ card: Card, _ cardView: CardView) {
@@ -105,6 +127,7 @@ class NewViewController: UIViewController {
             cardView.cardInternalView.layer.borderWidth = 3.0
             cardView.cardInternalView.layer.borderColor = UIColor.green.cgColor
             isMatchOnScreen = true
+            matchCardViewsOnScreen.append(cardView)
         } else if game.selectedCardsIndex.count == 3, card.isSelected {
             cardView.cardInternalView.layer.borderWidth = 3.0
             cardView.cardInternalView.layer.borderColor = UIColor.red.cgColor
