@@ -12,32 +12,43 @@ class NewViewController: UIViewController {
 
     @IBOutlet weak var boardView: UIView!
     
-    @IBAction func DealThreeMoreCards(_ sender: UIButton) {
-        game.dealThreeMoreCards()
-        for _ in 0..<3 {
-            addCardView()
-        }
-        updateViewFromModel()
-    }
-    
     private lazy var game = SetGame()
     
     private var cardViews = [CardView]()
+    
+    private var isMatchOnScreen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
         for _ in 0..<12 {
             addCardView()
         }
-        updateViewFromModel()
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.dealThreeMoreCards(_:)))
+        swipeDown.direction = .down
+        self.view.addGestureRecognizer(swipeDown)
     }
 
+    override func viewDidLayoutSubviews() {
+        updateViewFromModel()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func dealThreeMoreCards(_ sender: UISwipeGestureRecognizer) {
+        guard !game.deck.isNoMoreCardsInDeck() else {
+            return
+        }
+        game.dealThreeMoreCards()
+        for _ in 0..<3 {
+            addCardView()
+        }
+        updateViewFromModel()
     }
     
     private func addCardView(){
@@ -67,7 +78,19 @@ class NewViewController: UIViewController {
             cardView.cardLable.attributedText = getCardAttrString(card)
             cardView.frame = newGrid[index]!
             showCardSelection(card, cardView)
-//            showCardMatching(card, button)
+            showCardMatching(card, cardView)
+        }
+    }
+    
+    private func showCardMatching(_ card: Card, _ cardView: CardView) {
+        if card.isMatch {
+            cardView.cardInternalView.layer.borderWidth = 3.0
+            cardView.cardInternalView.layer.borderColor = UIColor.green.cgColor
+            isMatchOnScreen = true
+        } else if game.selectedCardsIndex.count == 3, card.isSelected {
+            cardView.cardInternalView.layer.borderWidth = 3.0
+            cardView.cardInternalView.layer.borderColor = UIColor.red.cgColor
+            isMatchOnScreen = false
         }
     }
     

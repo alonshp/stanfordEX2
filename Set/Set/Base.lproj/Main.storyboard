@@ -359,26 +359,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XB2-4t-zPq">
-                                <rect key="frame" x="16" y="20" width="343" height="489"/>
+                                <rect key="frame" x="16" y="20" width="343" height="631"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YgF-Ob-PZD">
-                                <rect key="frame" x="164" y="587" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="DealThreeMoreCards:" destination="NU3-E0-3Mg" eventType="touchUpInside" id="rs4-rW-hsL"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="a3w-0C-hM5" firstAttribute="trailing" secondItem="YgF-Ob-PZD" secondAttribute="trailing" constant="165" id="7JN-os-adp"/>
-                            <constraint firstItem="YgF-Ob-PZD" firstAttribute="leading" secondItem="a3w-0C-hM5" secondAttribute="leading" constant="164" id="Bui-4Q-nka"/>
                             <constraint firstItem="a3w-0C-hM5" firstAttribute="trailing" secondItem="XB2-4t-zPq" secondAttribute="trailing" constant="16" id="CYv-to-ZHZ"/>
                             <constraint firstItem="XB2-4t-zPq" firstAttribute="leading" secondItem="a3w-0C-hM5" secondAttribute="leading" constant="16" id="J24-E5-vpS"/>
                             <constraint firstItem="XB2-4t-zPq" firstAttribute="top" secondItem="a3w-0C-hM5" secondAttribute="top" id="caJ-Dj-RLz"/>
-                            <constraint firstItem="a3w-0C-hM5" firstAttribute="bottom" secondItem="YgF-Ob-PZD" secondAttribute="bottom" constant="50" id="cvo-MR-gG4"/>
-                            <constraint firstItem="YgF-Ob-PZD" firstAttribute="top" secondItem="XB2-4t-zPq" secondAttribute="bottom" constant="78" id="pvq-op-qNJ"/>
+                            <constraint firstItem="a3w-0C-hM5" firstAttribute="bottom" secondItem="XB2-4t-zPq" secondAttribute="bottom" constant="16" id="s3J-lA-bGl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="a3w-0C-hM5"/>
                     </view>
