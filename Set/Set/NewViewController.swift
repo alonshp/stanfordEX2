@@ -18,6 +18,8 @@ class NewViewController: UIViewController {
     
     private var isMatchOnScreen = false
     
+    private var rotationGesture: UIRotationGestureRecognizer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,9 +28,14 @@ class NewViewController: UIViewController {
             addCardView()
         }
         
+        // swipe down for deal 3 more cards
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.dealThreeMoreCards(_:)))
         swipeDown.direction = .down
         self.view.addGestureRecognizer(swipeDown)
+        
+        // rotation gesture to cause all the cards to randomly reshuffle
+        rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self.shuffleCards(_:)))
+        self.view.addGestureRecognizer(rotationGesture!)
     }
 
     override func viewDidLayoutSubviews() {
@@ -38,6 +45,17 @@ class NewViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func shuffleCards(_ sender: UIRotationGestureRecognizer) {
+        switch rotationGesture!.state {
+        case UIGestureRecognizerState.ended:
+            game.shuffleCardsBiengPlayed()
+            updateViewFromModel()
+        default:
+            break
+        }
+
     }
     
     @objc func dealThreeMoreCards(_ sender: UISwipeGestureRecognizer) {

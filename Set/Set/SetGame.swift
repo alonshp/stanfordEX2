@@ -211,6 +211,10 @@ public struct SetGame {
     init() {
         takeCardsFromDeck(numberOfCards: 12)
     }
+    
+    mutating func shuffleCardsBiengPlayed(){
+        cardsBeingPlayed.shuffle()
+    }
 }
 
 
