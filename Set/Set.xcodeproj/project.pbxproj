@@ -17,6 +17,11 @@
 		163DCEF5205A723200F94EAF /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEF4205A723200F94EAF /* Deck.swift */; };
 		163DCEFD205AB23E00F94EAF /* SetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCEFC205AB23E00F94EAF /* SetTests.swift */; };
 		163DCF05205E498700F94EAF /* SelectedCardsAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 163DCF04205E498700F94EAF /* SelectedCardsAttributes.swift */; };
+		16CE610520610B7700175406 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE610420610B7700175406 /* Grid.swift */; };
+		16CE610720610C1F00175406 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CE610620610C1F00175406 /* CardView.xib */; };
+		16CE6109206111AC00175406 /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE6108206111AC00175406 /* NewViewController.swift */; };
+		16CE610B206123BA00175406 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE610A206123BA00175406 /* CardView.swift */; };
+		16CE610D2061242A00175406 /* UIViewXibExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE610C2061242A00175406 /* UIViewXibExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,11 @@
 		163DCEFC205AB23E00F94EAF /* SetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTests.swift; sourceTree = "<group>"; };
 		163DCEFE205AB23E00F94EAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		163DCF04205E498700F94EAF /* SelectedCardsAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCardsAttributes.swift; sourceTree = "<group>"; };
+		16CE610420610B7700175406 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = ../../../../../../../Downloads/Grid.swift; sourceTree = "<group>"; };
+		16CE610620610C1F00175406 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
+		16CE6108206111AC00175406 /* NewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		16CE610A206123BA00175406 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		16CE610C2061242A00175406 /* UIViewXibExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewXibExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,10 +97,15 @@
 			children = (
 				163DCF04205E498700F94EAF /* SelectedCardsAttributes.swift */,
 				163DCEDF20581DF500F94EAF /* ViewController.swift */,
+				16CE6108206111AC00175406 /* NewViewController.swift */,
 				163DCEF4205A723200F94EAF /* Deck.swift */,
 				163DCEE120581DF500F94EAF /* Main.storyboard */,
 				163DCEF0205A636B00F94EAF /* SetGame.swift */,
 				163DCEF2205A637700F94EAF /* Card.swift */,
+				16CE610420610B7700175406 /* Grid.swift */,
+				16CE610620610C1F00175406 /* CardView.xib */,
+				16CE610A206123BA00175406 /* CardView.swift */,
+				16CE610C2061242A00175406 /* UIViewXibExtensions.swift */,
 				163DCEE420581DF500F94EAF /* Assets.xcassets */,
 				163DCEEF20581E1800F94EAF /* Supporting Files */,
 				163DCEE920581DF500F94EAF /* Info.plist */,
@@ -200,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				163DCEE820581DF500F94EAF /* LaunchScreen.storyboard in Resources */,
+				16CE610720610C1F00175406 /* CardView.xib in Resources */,
 				163DCEE520581DF500F94EAF /* Assets.xcassets in Resources */,
 				163DCEE320581DF500F94EAF /* Main.storyboard in Resources */,
 			);
@@ -219,11 +235,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16CE610D2061242A00175406 /* UIViewXibExtensions.swift in Sources */,
 				163DCEE020581DF500F94EAF /* ViewController.swift in Sources */,
 				163DCF05205E498700F94EAF /* SelectedCardsAttributes.swift in Sources */,
 				163DCEDE20581DF500F94EAF /* AppDelegate.swift in Sources */,
+				16CE6109206111AC00175406 /* NewViewController.swift in Sources */,
 				163DCEF5205A723200F94EAF /* Deck.swift in Sources */,
+				16CE610B206123BA00175406 /* CardView.swift in Sources */,
 				163DCEF1205A636B00F94EAF /* SetGame.swift in Sources */,
+				16CE610520610B7700175406 /* Grid.swift in Sources */,
 				163DCEF3205A637700F94EAF /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

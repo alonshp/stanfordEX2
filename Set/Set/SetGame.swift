@@ -62,7 +62,7 @@ public struct SetGame {
     mutating func dealThreeMoreCards(){
         if selectedCardsIndex.count == 3 {
             updateCardsAfterThreeSelected()
-        } else if cardsBeingPlayed.count < 24 {
+        } else if !deck.isNoMoreCardsInDeck() {
             // if there is a set in the visivle cards - decrease score
             if findSet() != nil {
                 score -= 3
@@ -70,8 +70,6 @@ public struct SetGame {
             
             // there is more place on the screen
             takeCardsFromDeck(numberOfCards: 3)
-            
-
         }
     }
     
