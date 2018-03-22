@@ -24,6 +24,8 @@ class NewViewController: UIViewController {
     
     private var isMatchOnScreen = false
     
+    private var isMultiplayerEnable = false
+    
     private var isViewDidLayoutSubviewsNeedToUpdateView = true
     
     private var wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = false
@@ -34,13 +36,13 @@ class NewViewController: UIViewController {
     
     private var rotationGesture: UIRotationGestureRecognizer?
     
-    
     @IBAction func cheatButton(_ sender: UIButton) {
         game.findAndMatchSet()
         updateViewFromModel()
-        iphoneLose()
+        if isMultiplayerEnable {
+            iphoneLose()
+        }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +52,24 @@ class NewViewController: UIViewController {
             addCardView()
         }
         
+        addGestures()
+
+//        iphonePlay()
+    }
+
+    override func viewDidLayoutSubviews() {
+        if isViewDidLayoutSubviewsNeedToUpdateView {
+            updateViewFromModel()
+            isViewDidLayoutSubviewsNeedToUpdateView = false
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    private func addGestures() {
         // swipe down for deal 3 more cards
         let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(self.dealThreeMoreCards(_:)))
         swipeDown.direction = .down
@@ -63,20 +83,24 @@ class NewViewController: UIViewController {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.startNewGame(_:)))
         swipeUp.direction = .up
         self.view.addGestureRecognizer(swipeUp)
-
-        iphonePlay()
-    }
-
-    override func viewDidLayoutSubviews() {
-        if isViewDidLayoutSubviewsNeedToUpdateView {
-            updateViewFromModel()
-            isViewDidLayoutSubviewsNeedToUpdateView = false
-        }
+        
+        // tap on emoji lable to enable multiplayer mode
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleMultiplayerMode(_:)))
+        emojiLable.addGestureRecognizer(tap)
+        emojiLable.isUserInteractionEnabled = true
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @objc func handleMultiplayerMode(_ sender: UITapGestureRecognizer) {
+        print(isMultiplayerEnable)
+        if isMultiplayerEnable {
+            isMultiplayerEnable = false
+            timer?.invalidate()
+            emojiLable.text = "👀"
+        } else {
+            isMultiplayerEnable = true
+            iphonePlay()
+        }
     }
     
     @objc func shuffleCards(_ sender: UIRotationGestureRecognizer) {
@@ -117,8 +141,8 @@ class NewViewController: UIViewController {
         updateViewFromModel()
         if let timer = timer {
             timer.invalidate()
+            emojiLable.text = "👀"
         }
-        iphonePlay()
     }
     
     private func addCardView(){
@@ -138,7 +162,7 @@ class NewViewController: UIViewController {
         game.chooseCard(at: cardNumber)
         updateViewFromModel()
         
-        if isMatchOnScreen {
+        if isMatchOnScreen, isMultiplayerEnable {
             iphoneLose()
         }
     }
