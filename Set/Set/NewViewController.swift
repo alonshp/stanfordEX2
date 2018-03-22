@@ -12,11 +12,19 @@ class NewViewController: UIViewController {
 
     @IBOutlet weak var boardView: UIView!
     
+    @IBOutlet weak var scoreLable: UILabel!
+    
+    @IBOutlet weak var emojiLable: UILabel!
+    
     private lazy var game = SetGame()
+    
+    private var timer: Timer?
     
     private var cardViews = [CardView]()
     
     private var isMatchOnScreen = false
+    
+    private var isViewDidLayoutSubviewsNeedToUpdateView = true
     
     private var wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = false
     
@@ -25,6 +33,14 @@ class NewViewController: UIViewController {
     private var matchCardViewsOnScreen = [CardView]()
     
     private var rotationGesture: UIRotationGestureRecognizer?
+    
+    
+    @IBAction func cheatButton(_ sender: UIButton) {
+        game.findAndMatchSet()
+        updateViewFromModel()
+        iphoneLose()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +58,20 @@ class NewViewController: UIViewController {
         // rotation gesture to cause all the cards to randomly reshuffle
         rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(self.shuffleCards(_:)))
         self.view.addGestureRecognizer(rotationGesture!)
+        
+        // swipe up to start a new game
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.startNewGame(_:)))
+        swipeUp.direction = .up
+        self.view.addGestureRecognizer(swipeUp)
+
+        iphonePlay()
     }
 
     override func viewDidLayoutSubviews() {
-        updateViewFromModel()
+        if isViewDidLayoutSubviewsNeedToUpdateView {
+            updateViewFromModel()
+            isViewDidLayoutSubviewsNeedToUpdateView = false
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,6 +101,26 @@ class NewViewController: UIViewController {
         updateViewFromModel()
     }
     
+    fileprivate func updateCardViewsWhenNewGameStarted() {
+        for cardView in cardViews {
+            cardView.removeFromSuperview()
+        }
+        cardViews = [CardView]()
+        for _ in 0..<12 {
+            addCardView()
+        }
+    }
+    
+    @objc func startNewGame(_ sender: UISwipeGestureRecognizer) {
+        game.newGame()
+        updateCardViewsWhenNewGameStarted()
+        updateViewFromModel()
+        if let timer = timer {
+            timer.invalidate()
+        }
+        iphonePlay()
+    }
+    
     private func addCardView(){
         let cardView = CardView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
@@ -91,6 +137,18 @@ class NewViewController: UIViewController {
         }
         game.chooseCard(at: cardNumber)
         updateViewFromModel()
+        
+        if isMatchOnScreen {
+            iphoneLose()
+        }
+    }
+    
+    private func handleWhenNoMoreCardsInDeck() {
+        wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = true
+        for cardView in matchCardViewsOnScreen {
+            cardViews.remove(at: cardViews.index(of: cardView)!)
+            matchCardViewsOnLastMoveWhenDeckIsEmpty.append(cardView)
+        }
     }
     
     private func updateViewFromModel() {
@@ -106,20 +164,12 @@ class NewViewController: UIViewController {
             showCardSelection(card, cardView)
             showCardMatching(card, cardView)
         }
-        if wasMatchOnScreenOnLastMoveWhenDeckIsEmpty {
-            wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = false
-            for cardView in matchCardViewsOnLastMoveWhenDeckIsEmpty {
-                cardView.removeFromSuperview()
-            }
-        }
-        if game.deck.isNoMoreCardsInDeck(), isMatchOnScreen {
-            wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = true
-            for cardView in matchCardViewsOnScreen {
-                cardViews.remove(at: cardViews.index(of: cardView)!)
-                matchCardViewsOnLastMoveWhenDeckIsEmpty.append(cardView)
-            }
+        if game.deck.isNoMoreCardsInDeck() {
+            handleWhenNoMoreCardsInDeck()
         }
         
+        // update score lable
+        scoreLable.text = "Score: \(game.score)"
     }
     
     private func showCardMatching(_ card: Card, _ cardView: CardView) {
@@ -204,7 +254,52 @@ class NewViewController: UIViewController {
             return [NSAttributedStringKey.foregroundColor: cardColor.withAlphaComponent(1), NSAttributedStringKey.strokeWidth: 4]
         }
     }
+    
+    private func handleWhenWasMatchAndDeckIsEmpty() {
+        self.wasMatchOnScreenOnLastMoveWhenDeckIsEmpty = false
+        for cardView in self.matchCardViewsOnLastMoveWhenDeckIsEmpty {
+            cardView.removeFromSuperview()
+        }
+    }
+    
+    private func moveToNextRoundAfterThreeSeconds() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.game.updateCardsAfterThreeSelected()
+            self.updateViewFromModel()
+            self.iphonePlay()
+            self.isMatchOnScreen = false
+            self.view.isUserInteractionEnabled = true
+            
+            if self.wasMatchOnScreenOnLastMoveWhenDeckIsEmpty {
+                self.handleWhenWasMatchAndDeckIsEmpty()
+            }
+        }
+    }
 
-
+    private func iphonePlay(){
+        emojiLable.text = "🤔"
+        timer = Timer.scheduledTimer(withTimeInterval: (TimeInterval(5 + 30.arc4random)), repeats: false) { timer in
+            self.emojiLable.text = "😁"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                self.iphoneWins()
+            }
+        }
+    }
+    
+    private func iphoneWins(){
+        self.emojiLable.text = "😂"
+        self.game.findAndMatchSet()
+        self.updateViewFromModel()
+        view.isUserInteractionEnabled = false
+        isMatchOnScreen = true
+        moveToNextRoundAfterThreeSeconds()
+    }
+    
+    private func iphoneLose(){
+        timer?.invalidate()
+        self.emojiLable.text = "😢"
+        view.isUserInteractionEnabled = false
+        moveToNextRoundAfterThreeSeconds()
+    }
 
 }

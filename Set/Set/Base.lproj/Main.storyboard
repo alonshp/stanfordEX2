@@ -359,21 +359,54 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XB2-4t-zPq">
-                                <rect key="frame" x="16" y="20" width="343" height="631"/>
+                                <rect key="frame" x="16" y="20" width="343" height="590"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qji-0z-eSA">
+                                <rect key="frame" x="16" y="618" width="343" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MZ7-Tr-kIQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="139" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dKB-v2-0mO">
+                                        <rect key="frame" x="154" y="0.0" width="101" height="34"/>
+                                        <color key="backgroundColor" red="0.38038012385368347" green="0.46892261505126953" blue="0.96871036291122437" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="Cheat">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cheatButton:" destination="NU3-E0-3Mg" eventType="touchUpInside" id="Vel-hc-Twk"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="👀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5B-k8-jwN">
+                                        <rect key="frame" x="270" y="0.0" width="73" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="qji-0z-eSA" firstAttribute="leading" secondItem="a3w-0C-hM5" secondAttribute="leading" constant="16" id="4hd-tl-Xxi"/>
                             <constraint firstItem="a3w-0C-hM5" firstAttribute="trailing" secondItem="XB2-4t-zPq" secondAttribute="trailing" constant="16" id="CYv-to-ZHZ"/>
+                            <constraint firstItem="a3w-0C-hM5" firstAttribute="trailing" secondItem="qji-0z-eSA" secondAttribute="trailing" constant="16" id="Eai-t2-1X1"/>
                             <constraint firstItem="XB2-4t-zPq" firstAttribute="leading" secondItem="a3w-0C-hM5" secondAttribute="leading" constant="16" id="J24-E5-vpS"/>
+                            <constraint firstItem="a3w-0C-hM5" firstAttribute="bottom" secondItem="qji-0z-eSA" secondAttribute="bottom" constant="15" id="Whh-hF-DJ0"/>
                             <constraint firstItem="XB2-4t-zPq" firstAttribute="top" secondItem="a3w-0C-hM5" secondAttribute="top" id="caJ-Dj-RLz"/>
-                            <constraint firstItem="a3w-0C-hM5" firstAttribute="bottom" secondItem="XB2-4t-zPq" secondAttribute="bottom" constant="16" id="s3J-lA-bGl"/>
+                            <constraint firstItem="qji-0z-eSA" firstAttribute="top" secondItem="XB2-4t-zPq" secondAttribute="bottom" constant="8" id="oRT-1v-z6l"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="a3w-0C-hM5"/>
                     </view>
                     <connections>
                         <outlet property="boardView" destination="XB2-4t-zPq" id="pv6-WJ-Cyf"/>
+                        <outlet property="emojiLable" destination="d5B-k8-jwN" id="oCu-FI-ZRl"/>
+                        <outlet property="scoreLable" destination="MZ7-Tr-kIQ" id="ojQ-0D-QVW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uhv-pM-a8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
