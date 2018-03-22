@@ -41,6 +41,9 @@ class NewViewController: UIViewController {
         updateViewFromModel()
         if isMultiplayerEnable {
             iphoneLose()
+        } else {
+            view.isUserInteractionEnabled = false
+            moveToNextRoundAfterThreeSeconds()
         }
     }
     
@@ -162,8 +165,9 @@ class NewViewController: UIViewController {
         
         if isMatchOnScreen, isMultiplayerEnable {
             iphoneLose()
-        } else if wasMatchOnScreenOnLastMoveWhenDeckIsEmpty {
-            handleWhenWasMatchAndDeckIsEmpty()
+        } else if isMatchOnScreen {
+            view.isUserInteractionEnabled = false
+            moveToNextRoundAfterThreeSeconds()
         }
     }
     
@@ -290,7 +294,9 @@ class NewViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
             self.game.updateCardsAfterThreeSelected()
             self.updateViewFromModel()
-            self.iphonePlay()
+            if self.isMultiplayerEnable {
+                self.iphonePlay()
+            }
             self.isMatchOnScreen = false
             self.view.isUserInteractionEnabled = true
             
