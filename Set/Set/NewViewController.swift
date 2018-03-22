@@ -53,8 +53,6 @@ class NewViewController: UIViewController {
         }
         
         addGestures()
-
-//        iphonePlay()
     }
 
     override func viewDidLayoutSubviews() {
@@ -164,6 +162,8 @@ class NewViewController: UIViewController {
         
         if isMatchOnScreen, isMultiplayerEnable {
             iphoneLose()
+        } else if wasMatchOnScreenOnLastMoveWhenDeckIsEmpty {
+            handleWhenWasMatchAndDeckIsEmpty()
         }
     }
     
